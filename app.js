@@ -21,98 +21,210 @@ class Question {
   }
 }
 
-// ========== Сервисы ==========
-class StorageService {
-  static saveState(state) {
-    // TODO: сериализовать state и сохранить в localStorage
-    // Пример: localStorage.setItem(STORAGE_KEYS.STATE, JSON.stringify(state));
-    throw new Error("Not implemented: StorageService.saveState");
-  }
+ // ========== Сервисы ==========
+ class StorageService {
+   static saveState(state) {
+     // TODO: сериализовать state и сохранить в localStorage
+     // Пример: localStorage.setItem(STORAGE_KEYS.STATE, JSON.stringify(state));
+	 try {		 
+		 localStorage.setItem(STORAGE_KEYS.STATE, JSON.stringify(state));
+	 }
+	 catch {
+		throw new Error("Not implemented: StorageService.saveState");
+	 }
+   }
 
-  static loadState() {
-    // TODO: прочитать и распарсить состояние, вернуть объект или null
-    throw new Error("Not implemented: StorageService.loadState");
-  }
+    static loadState() {
+     // TODO: прочитать и распарсить состояние, вернуть объект или null
+	 try {
+		 localStorage.load(STORAGE_KEYS.STATE, JSON.stringify(state));		
+		 parse(STORAGE_KEYS.STATE, JSON.stringify(state));	
+		 state(title,timeLimitSec,passThreshold,questions.map,questionId -> selectedIndex);
+		 import(state, save_state.json);	
+	 }
+	 catch {
+		 return null
+	 }
+     throw new Error("Not implemented: StorageService.loadState");
+   }
 
-  static clear() {
-    // TODO: очистить сохранённое состояние
-    throw new Error("Not implemented: StorageService.clear");
-  }
-}
+    static clear() {
+     // TODO: очистить сохранённое состояние
+		try {
+			selectedIndex := -1;//null//undefined
+			currentIndex := 0;
+			position := 0;
+			correct := 0;
+			total := 0;
+			percent := 0;
+			passed: false;
+			}
+			catch {
+			throw new Error("Not implemented: StorageService.clear");
+			}
+	 }
+   }
+ }
 
-// ========== Движок теста ==========
-class QuizEngine {
-  /** @param {QuizDTO} quiz */
-  constructor(quiz) {
-    this.title = quiz.title;
-    this.timeLimitSec = quiz.timeLimitSec;
-    this.passThreshold = quiz.passThreshold;
-    this.questions = quiz.questions.map((q) => new Question(q));
+  // ========== Движок теста ==========
+ class QuizEngine {
+   /** @param {QuizDTO} quiz */
+   constructor(quiz) {
+     this.title = quiz.title;
+	 this.timeLimitSec = quiz.timeLimitSec;
+     this.passThreshold = quiz.passThreshold;
+     this.questions = quiz.questions.map((q) => new Question(q));
+     this.currentIndex = 0;
+     /** @type {Record<string, number|undefined>} */
+     this.answers = {}; // questionId -> selectedIndex
+     this.remainingSec = quiz.timeLimitSec;
+     this.isFinished = false;
+   }
 
-    this.currentIndex = 0;
-    /** @type {Record<string, number|undefined>} */
-    this.answers = {}; // questionId -> selectedIndex
-    this.remainingSec = quiz.timeLimitSec;
-    this.isFinished = false;
-  }
+   get length() {
+     return this.questions.length;
+   }
 
-  get length() {
-    return this.questions.length;
-  }
-  get currentQuestion() {
-    return this.questions[this.currentIndex];
-  }
+   get currentQuestion() {
+     return this.questions[this.currentIndex];
+   }
 
-  /** @param {number} index */
-  goTo(index) {
-    // TODO: валидировать границы и сменить текущий индекс
-    throw new Error("Not implemented: QuizEngine.goTo");
-  }
+    /** @param {number} index */
+   goTo(index) {
+     // TODO: валидировать границы и сменить текущий индекс
+	 try {
+		 if(currentIndex >= 0 && currentIndex < TotalNumQuestions)
+			 then{	
+				 sfd
+				 currentIndex := currentIndex + new.position;
+				 break		 
+		 }
+		 /*
+		 else{
+			if(index.current < 0) {
+				
+			}	
+			if(index.current = TotalNumQuestions) {
+				
+			}
+		*/			
+		 }
+	 }
+	 catch {
+     throw new Error("Not implemented: QuizEngine.goTo");
+	 }
+   }
 
-  next() {
-    // TODO: перейти к следующему вопросу, если возможно
-    throw new Error("Not implemented: QuizEngine.next");
-  }
+    next() {
+     // TODO: перейти к следующему вопросу, если возможно
+	 try {
+		 if(index.current >= 0 && index.current < TotalNumQuestions)
+			 then {	
+				position := 1;
+				goTo(position);
+			 }
+			 else {
+				lock.btn-next;
+			 }
+				 
+	 }
+	 catch {
+     throw new Error("Not implemented: QuizEngine.next");
+	 }
+   }
+        prev() {
+     // TODO: перейти к предыдущему вопросу, если возможно
+	 try {
+		 if(index.current >= 0 && index.current < TotalNumQuestions)
+			 then {	
+				position := -1;
+				goTo(position);
+			 }
+			 else {
+				lock.btn-prev;
+			 }
+	 catch {
+     throw new Error("Not implemented: QuizEngine.prev");
+	 }	 
+   }
 
-  prev() {
-    // TODO: перейти к предыдущему вопросу, если возможно
-    throw new Error("Not implemented: QuizEngine.prev");
-  }
+    /** @param {number} optionIndex */   select(optionIndex) {
+     // TODO: сохранить выбор пользователя для текущего вопроса
+	 try {
+		 
+	 }
+	 catch {
+     throw new Error("Not implemented: QuizEngine.select");
+	 }	 
+   } 
 
-  /** @param {number} optionIndex */
-  select(optionIndex) {
-    // TODO: сохранить выбор пользователя для текущего вопроса
-    throw new Error("Not implemented: QuizEngine.select");
-  }
+   getSelectedIndex() {
+     // TODO: вернуть выбранный индекс для текущего вопроса (или undefined)
+	 try {
+		 if() {
+			 SelectedIndex := questionId;
+		 }
+		 then {
+			 SelectedIndex := undefined;
+		 }
+		return SelectedIndex;		 
+	 }
+	 catch {
+     throw new Error("Not implemented: QuizEngine.getSelectedIndex");
+	 }	 
+   }
+      tick() {
+     // TODO: декремент таймера; если 0 — завершить тест
+	 try {
+		 timerId = window.setInterval(1000);
+		 /*
+		 if( this.remainingSec > 0 ) {
+			 this.remainingSec --;
+		 }
+		 else {
+			 finish();
+		 } */
+	 }
+	 catch {
+     throw new Error("Not implemented: QuizEngine.tick");
+	 }	 
+   }
 
-  getSelectedIndex() {
-    // TODO: вернуть выбранный индекс для текущего вопроса (или undefined)
-    throw new Error("Not implemented: QuizEngine.getSelectedIndex");
-  }
+    finish() {
+     // TODO: зафиксировать завершение и вернуть сводку результата        // return { correct: number, total: number, percent: number, passed: boolean }
+	 try {
 
-  tick() {
-    // TODO: декремент таймера; если 0 — завершить тест
-    throw new Error("Not implemented: QuizEngine.tick");
-  }
+		this.isFinished = true;	
+		return { correct: number, total: number, percent: number, passed: boolean }		 
+	 }
+	 catch {
+     throw new Error("Not implemented: QuizEngine.finish");
+	 }	 
+   } 
 
-  finish() {
-    // TODO: зафиксировать завершение и вернуть сводку результата
-    // return { correct: number, total: number, percent: number, passed: boolean }
-    throw new Error("Not implemented: QuizEngine.finish");
-  }
+   /** Восстановление/выгрузка состояния для localStorage */
+   toState() {
+     // TODO: вернуть сериализуемый снимок состояния
+	 try {
+		 localStorage.return(STORAGE_KEYS.STATE, JSON.stringify(state))		 
+	 }
+	 catch {
+     throw new Error("Not implemented: QuizEngine.toState");
+	 }	 
+   }
 
-  /** Восстановление/выгрузка состояния для localStorage */
-  toState() {
-    // TODO: вернуть сериализуемый снимок состояния
-    throw new Error("Not implemented: QuizEngine.toState");
-  }
-
-  /** @param {any} state */
-  static fromState(quiz, state) {
+    /** @param {any} state */
+	static fromState(quiz, state) {
     // TODO: создать двигатель на базе сохранённого состояния
-    throw new Error("Not implemented: QuizEngine.fromState");
-  }
-}
+	 try {
+		 quiz.state(remainingSec : number,question_id : number, isFinished : boolean)
+		 export.quiz(state, save_state.json);
+	 }
+	 catch {
+     throw new Error("Not implemented: QuizEngine.fromState");
+	 }	
+   }
+ }
 
 // ========== DOM-утилиты ==========
 const $ = (sel) => /** @type {HTMLElement} */ (document.querySelector(sel));
